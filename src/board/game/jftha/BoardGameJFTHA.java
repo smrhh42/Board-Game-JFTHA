@@ -29,5 +29,7 @@ public class BoardGameJFTHA {
         Dice dice = new Dice();
         int roll = dice.getRoll();
         System.out.println("roll number = " + roll);
+        
+        //This is Josh here just to test committing
     }
 }
