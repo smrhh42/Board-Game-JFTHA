@@ -2,8 +2,12 @@
  * To change this template, choose Tools | Templates
  * and open the template in the editor.
  */
-package board.game.jftha;
+package jftha.heroes;
 
+import java.util.ArrayList;
+import jftha.items.Item;
+import jftha.spells.Spell;
+import jftha.main.Effect;
 
 public class Hero {
     //Determines how much damage can be dealth to an enemy through weapons
@@ -19,12 +23,18 @@ public class Hero {
     private int luck;
     //Determines how many items a player can hold at any time
     private int storage_space;
+    //The items the Hero is currently carrying
+    private ArrayList<Item> items;
     //Determines how many spells a player is able to cast
     private int spell_slots;
+    //The spells the Hero currently knows
+    private ArrayList<Spell> spells;
     //Determined by Defense stat. Also known as health points
     private int hp;
     //Determined by Magic stat. Also known as magic points
     private int mp;
+    //Special to be determined by the defending class
+    private Effect special; //***Should this be an Effect for an entirely new class?***
     
     //Constructor
     public Hero(){

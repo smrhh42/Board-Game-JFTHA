@@ -4,10 +4,12 @@
  */
 package GUI;
 
-import board.game.jftha.Dice;
+import jftha.main.Dice;
 import java.util.Random;
 import javax.swing.Icon;
 import javax.swing.ImageIcon;
+import javax.swing.Timer;
+import java.awt.event.ActionListener;
 
 /**
  *
@@ -74,52 +76,7 @@ public class Board extends javax.swing.JFrame {
 
     private void rollDieButtonMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_rollDieButtonMouseClicked
         Dice die = new Dice();
-        int amtRolled = die.reroll(6);
-        Random rand = new Random();
-        int curPic;
-        String imageName;
-        for (int i = 0; i < 8; i++) {
-            curPic = rand.nextInt(5) + 1;
-            if (curPic == 1) {
-                imageName = "die1.png";
-            } else if (curPic == 2) {
-                imageName = "die2.png";
-            } else if (curPic == 3) {
-                imageName = "die3.png";
-            } else if (curPic == 4) {
-                imageName = "die4.png";
-            } else if (curPic == 5) {
-                imageName = "die5.png";
-            } else if (curPic == 6) {
-                imageName = "die6.png";
-            } else {
-                System.out.println("Invalid roll.");
-                return;
-            }
-            ImageIcon icon = new ImageIcon(imageName);
-            icon.getImage().flush();
-            dieLabel.setIcon(icon);
-        }
-
-        if (amtRolled == 1) {
-            imageName = "die1.png";
-        } else if (amtRolled == 2) {
-            imageName = "die2.png";
-        } else if (amtRolled == 3) {
-            imageName = "die3.png";
-        } else if (amtRolled == 4) {
-            imageName = "die4.png";
-        } else if (amtRolled == 5) {
-            imageName = "die5.png";
-        } else if (amtRolled == 6) {
-            imageName = "die6.png";
-        } else {
-            System.out.println("Invalid roll.");
-            return;
-        }
-        ImageIcon icon = new ImageIcon(imageName);
-        icon.getImage().flush();
-        dieLabel.setIcon(icon);
+        die.rollGUI(6, dieLabel);
     }//GEN-LAST:event_rollDieButtonMouseClicked
 
     /**

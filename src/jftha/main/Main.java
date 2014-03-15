@@ -1,14 +1,9 @@
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
-package board.game.jftha;
+package jftha.main;
 
-/**
- *
- * @author tue75856
- */
-public class BoardGameJFTHA {
+import jftha.heroes.Barbarian;
+import jftha.heroes.Hero;
+
+public class Main {
 
     /**
      * @param args the command line arguments
