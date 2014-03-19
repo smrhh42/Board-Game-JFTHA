@@ -1,5 +1,9 @@
 package jftha.heroes;
 
+import jftha.items.ShiningArmor;
+import jftha.items.DivineBlade;
+import jftha.spells.Heal;
+
 public class Paladin extends Hero{
    
     //Constructor
@@ -11,6 +15,9 @@ public class Paladin extends Hero{
         this.setHP(super.getHP() + 20);
         this.setMP(super.getMP() + 10);
         this.setSpellSlots(super.getSpellSlots() + 1);
+        this.addItem(new ShiningArmor());
+        this.addItem(new DivineBlade());
+        this.addSpell(new Heal());
     }
     
 }

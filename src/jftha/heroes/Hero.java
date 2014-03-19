@@ -113,7 +113,7 @@ public class Hero {
     
     //
     public boolean addItem(Item item) {
-        if(items.size() < storage_space) {
+        if(!items.contains(item) && items.size() < storage_space) {
             if(items.add(item))
                 return true;
         }
@@ -121,7 +121,7 @@ public class Hero {
     }
     
     public boolean addSpell(Spell spell) {
-        if(spells.size() < spell_slots) {
+        if(!spells.contains(spell) && spells.size() < spell_slots) {
             if(spells.add(spell))
                 return true;
         }

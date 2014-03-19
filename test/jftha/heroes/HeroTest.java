@@ -11,6 +11,7 @@ import org.junit.BeforeClass;
 import org.junit.Test;
 import static org.junit.Assert.*;
 import jftha.spells.*;
+import jftha.items.*;
 
 /**
  *
@@ -140,7 +141,7 @@ public class HeroTest {
     }
     
     /** 
-     * Test to ensure that storage_space is the maximum amount of items
+     * Test to ensure that spell_slots is the maximum amount of spells
      */
     @Test
     public void testSpellStorageLimit() {
@@ -150,5 +151,31 @@ public class HeroTest {
         assertFalse(hero.addSpell(new Shield()));
     }
     
+    /**
+     * Test to ensure that storage_space is the maximum amount of items
+     */
+    
+    @Test
+    public void testItemStorageLimit() {
+        assertEquals(5, hero.getStorageSpace());
+        hero.addItem(new AnimalSkin());
+        hero.addItem(new Ax());
+        hero.addItem(new Cloak());
+        hero.addItem(new Dagger());
+        hero.addItem(new MageRobe());
+        assertFalse(hero.addItem(new SpellBook()));
+    }
+    
+    @Test
+    public void testForNoDuplicateItems() {
+        hero.addItem(new Ax());
+        assertFalse(hero.addItem(new Ax()));
+    }
+    
+    @Test
+    public void testForNoDuplicateSpells() {
+        hero.addSpell(new Heal());
+        assertFalse(hero.addSpell(new Heal()));
+    }
     
 }
