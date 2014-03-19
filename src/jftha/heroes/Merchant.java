@@ -20,6 +20,11 @@ public class Merchant extends Hero{
         this.addItem(new WagonOfGoods());     
     }
     
+    /**
+     * 
+     * @param buy
+     * @return 
+     */
     @Override
     public boolean buy(Buyable buy){
         int f = buy.getGoldCost(); 
@@ -29,8 +34,12 @@ public class Merchant extends Hero{
         return false;
     }
     
+    /**
+     * 
+     * @param attacked 
+     */
     @Override
-    public void atkEnemy(){
+    public void attackEnemy(Hero attacked){
         //Can only perform attacks with items and spells.
     }
 }

@@ -8,8 +8,8 @@ public class Priest extends Hero{
     
     //Constructor
     public Priest(){
-        this.setMP(super.getMP() + 10);
-        this.setHP(super.getHP() - 10);
+        this.setMaxMP(super.getMaxMP() + 10);
+        this.setMaxHP(super.getMaxHP() - 10);
         this.addItem(new Chasuble());
         this.addItem(new Bible());
         this.addSpell(new Heal());

@@ -20,11 +20,14 @@ public class Mage extends Hero{
         this.addSpell(new Fireball());
         this.addSpell(new Shield());
     }
-    
+    /**Mage's version of spell casting. The spell costs 10% less magic.
+     * 
+     * @param spell The spell to be cast.
+     */
     @Override
-    public void castSpell(){
-        int f = this.getMP(); 
-        f -= (spells.getmpCost() * multiplier);
-        this.setMP(f);
+    public void castSpell(Spell spell){
+        int f = this.getMaxMP(); 
+        f -= (spell.getmpCost() * multiplier);
+        this.setMaxMP(f);
     }
 }

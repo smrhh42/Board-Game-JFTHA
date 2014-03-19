@@ -6,8 +6,8 @@ public class MartialArtist extends Hero{
     public MartialArtist(){
         this.setStrength(super.getStrength() + 2);
         this.setAgility(super.getAgility() + 2);
-        this.setHP(super.getHP() + 10);
-        this.setMP(super.getMP() + 10);
+        this.setMaxHP(super.getMaxHP() + 10);
+        this.setMaxMP(super.getMaxMP() + 10);
     }
     
 }

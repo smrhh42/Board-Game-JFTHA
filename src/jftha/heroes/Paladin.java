@@ -12,8 +12,8 @@ public class Paladin extends Hero{
         this.setMagic(super.getMagic() + 5);
         this.setDefense(super.getDefense() + 5);
         this.setLuck(super.getLuck() +5);
-        this.setHP(super.getHP() + 20);
-        this.setMP(super.getMP() + 10);
+        this.setMaxHP(super.getMaxHP() + 20);
+        this.setMaxMP(super.getMaxMP() + 10);
         this.setSpellSlots(super.getSpellSlots() + 1);
         this.addItem(new ShiningArmor());
         this.addItem(new DivineBlade());

@@ -119,25 +119,25 @@ public class HeroTest {
     }
 
     /**
-     * Test of setHP method, of class Hero.
+     * Test of setMaxHP method, of class Hero.
      */
     @Test
     public void testSetHP() {
-        assertEquals(60, hero.getHP());
+        assertEquals(60, hero.getMaxHP());
         int hp = 55;
-        hero.setHP(hp);
-        assertEquals(hp, hero.getHP());
+        hero.setMaxHP(hp);
+        assertEquals(hp, hero.getMaxHP());
     }
 
     /**
-     * Test of setMP method, of class Hero.
+     * Test of setMaxMP method, of class Hero.
      */
     @Test
     public void testSetMP() {
-        assertEquals(30, hero.getMP());
+        assertEquals(30, hero.getMaxMP());
         int mp = 25;
-        hero.setMP(mp);
-        assertEquals(mp, hero.getMP());
+        hero.setMaxMP(mp);
+        assertEquals(mp, hero.getMaxMP());
     }
     
     /** 
