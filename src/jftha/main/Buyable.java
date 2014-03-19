@@ -18,6 +18,14 @@ public class Buyable { //created because Spell and Item share many characteristi
     }
     
     //dropEffect
+    public boolean dropEffect(Effect effect) {
+        if(!effects.contains(effect)){
+            return false;
+        } else {
+            effects.remove(effect);
+            return true;
+        }
+    }
     
     public void setGoldCost(int newGoldCost){
         this.goldCost = newGoldCost;

@@ -10,7 +10,7 @@ import jftha.spells.Spell;
 import jftha.main.Effect;
 
 public class Hero {
-    //Determines how much damage can be dealth to an enemy through weapons
+    //Determines how much damage can be dealt to an enemy through weapons
     private int strength;
     //Determines how many spaces the player can move per turn
     private int agility;
@@ -47,6 +47,8 @@ public class Hero {
         this.spell_slots = 2;
         this.hp = 60;
         this.mp = 30;
+        this.items = new ArrayList<>(this.storage_space);
+        this.spells = new ArrayList<>(this.spell_slots);
     }
     
     //Setter methods
@@ -67,9 +69,11 @@ public class Hero {
     }
     public void setStorageSpace(int storage_space){
         this.storage_space = storage_space;
+        this.items.ensureCapacity(storage_space);
     }
     public void setSpellSlots(int spell_slots){
         this.spell_slots = spell_slots;
+        this.spells.ensureCapacity(spell_slots);
     }
     public void setHP(int hp){
         this.hp = hp;
@@ -105,6 +109,23 @@ public class Hero {
     }
     public int getMP(){
         return mp;
+    }
+    
+    //
+    public boolean addItem(Item item) {
+        if(items.size() < storage_space) {
+            if(items.add(item))
+                return true;
+        }
+        return false;
+    }
+    
+    public boolean addSpell(Spell spell) {
+        if(spells.size() < spell_slots) {
+            if(spells.add(spell))
+                return true;
+        }
+        return false;
     }
 }
 
