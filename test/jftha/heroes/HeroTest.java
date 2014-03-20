@@ -12,6 +12,7 @@ import org.junit.Test;
 import static org.junit.Assert.*;
 import jftha.spells.*;
 import jftha.items.*;
+import org.junit.Ignore;
 
 /**
  *
@@ -141,7 +142,7 @@ public class HeroTest {
     }
     
     /** 
-     * Test to ensure that spell_slots is the maximum amount of spells
+     * Test to ensure that spell_slots is the maximum amount of spells.
      */
     @Test
     public void testSpellStorageLimit() {
@@ -152,7 +153,7 @@ public class HeroTest {
     }
     
     /**
-     * Test to ensure that storage_space is the maximum amount of items
+     * Test to ensure that storage_space is the maximum amount of items.
      */
     
     @Test
@@ -178,4 +179,33 @@ public class HeroTest {
         assertFalse(hero.addSpell(new Heal()));
     }
     
+    @Ignore
+    @Test
+    public void testMakeGhost() {
+        fail("MakeGhost test not written yet");
+    }
+    @Ignore
+    @Test
+    public void testUnGhost() {
+        fail("UnGhost test not written yet");
+    }
+    @Ignore
+    @Test
+    public void testCastSpell() {
+        fail("CastSpell test not written yet");
+    }
+    @Ignore
+    @Test
+    public void testAttackEnemy() {
+        fail("attackEnemy test not written yet");
+    }
+    
+    @Test
+    public void testBuy() {
+        assertEquals(0, hero.getGold());
+        assertFalse(hero.buy(new Fireball()));
+        hero.addGold(50);
+        assertTrue(hero.buy(new Fireball()));
+        assertEquals(40, hero.getGold());
+    }
 }

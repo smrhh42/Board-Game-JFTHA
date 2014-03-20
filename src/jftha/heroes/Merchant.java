@@ -4,9 +4,9 @@ import jftha.items.WoolClothing;
 import jftha.items.WagonOfGoods;
 import jftha.main.*;
 
-public class Merchant extends Hero{
+public class Merchant extends Hero {
     
-    final double discount = 0.25;
+    final double discount = 1 - 0.25;
     
     //Constructor
     public Merchant(){
@@ -27,10 +27,10 @@ public class Merchant extends Hero{
      */
     @Override
     public boolean buy(Buyable buy){
-        int f = buy.getGoldCost(); 
-        f -= (buy.getGoldCost() * discount);
-        //need setter and getter for gold
-        //this.getGold() - f;
+        if(getGold() >= buy.getGoldCost()) {
+            spendGold((int)(buy.getGoldCost() * discount));
+            return true;
+        }
         return false;
     }
     

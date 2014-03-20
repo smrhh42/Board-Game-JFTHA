@@ -151,6 +151,16 @@ public class Hero {
     public void castSpell(Spell spell){
         
     }
+    
+    /** Allows a character to cast a spell against an enemy character.
+     * 
+     * @param spell The spell to be cast.
+     * @param enemy The enemy being attacked by the spell
+     */
+    public void castSpell(Spell spell, Hero enemy){
+        
+    }
+    
     /** Turns a character into a ghost.
      * 
      */
@@ -183,11 +193,11 @@ public class Hero {
     
     /** Allows a character to attack another character
      * 
-     * @param attacked The character that is getting attacked
+     * @param enemy The character that is getting enemy
      */
-    public void attackEnemy(Hero attacked){
+    public void attackEnemy(Hero enemy){
         //cannot atk ghost unless this character have spiritual item
-        double damage = (this.strength - attacked.defense) - (0.2 * (this.luck - attacked.luck));
+        double damage = (this.strength - enemy.defense) - (0.2 * (this.luck - enemy.luck));
         
     }
     /** Allows a character to buy an item in the store.
@@ -196,11 +206,11 @@ public class Hero {
      * @return true if purchase is went through
      */
     public boolean buy(Buyable buy){
-        int f = getGold(); 
         // if character has the gold
-        f -= (buy.getGoldCost());
-        //need setter and getter for gold
-        //this.getGold() - f;
+        if(getGold() >= buy.getGoldCost()) {
+            spendGold(buy.getGoldCost());
+            return true;
+        }
         return false;
     }
     
