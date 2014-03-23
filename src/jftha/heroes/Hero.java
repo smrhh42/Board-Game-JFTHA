@@ -9,6 +9,7 @@ import jftha.items.Item;
 import jftha.main.Buyable;
 import jftha.spells.Spell;
 import jftha.main.Effect;
+import java.util.Random;
 
 public class Hero {
     // Determines how much damage can be dealt to an enemy through weapons
@@ -43,7 +44,11 @@ public class Hero {
     // Gold the player currently has
     private int gold;
     // Determines if player is a ghost
-    private boolean isGhost;
+    private boolean isGhost = false;
+    // Determines if the player had been a ghost and came back
+    private boolean wasGhost = false;
+    //Helper variable for attackEnemy, watched if Hero was attacked during Attack phase or not
+    private boolean wasAttacked;
     
     //Constructor
     public Hero(){
@@ -60,6 +65,7 @@ public class Hero {
         this.spells = new ArrayList<>(this.spell_slots);
         this.isGhost = false;
         this.gold = 0;
+        this.wasAttacked = false;
     }
     
     //Setter methods
@@ -98,11 +104,8 @@ public class Hero {
     public void setCurrentMP(int mp) {
         this.currentMP = mp;
     }
-    public void addGold(int gold) {
-        this.gold += gold;
-    }
-    public void spendGold(int gold) {
-        this.gold -= gold;
+    public void setGold(int gold) {
+        this.gold = gold;
     }
     
     //Getter Methods
@@ -141,6 +144,12 @@ public class Hero {
     }
     public int getGold() {
         return gold;
+    }
+    public boolean getWasAttacked() {
+        return wasAttacked;
+    }
+    public boolean isGhost() {
+        return isGhost;
     }
     
     
@@ -187,28 +196,48 @@ public class Hero {
      */
     public void unGhost(){
         this.isGhost = false;
+        this.wasGhost = true;
         this.currentHP = this.maxHP;
         //Lose Spectre Shots;
     }
     
     /** Allows a character to attack another character
      * 
-     * @param enemy The character that is getting enemy
+     * @param attacked The character that is getting enemy
      */
-    public void attackEnemy(Hero enemy){
-        //cannot atk ghost unless this character have spiritual item
-        double damage = (this.strength - enemy.defense) - (0.2 * (this.luck - enemy.luck));
-        
+    public void attackEnemy(Hero attacked) {
+        if (attacked.wasAttacked == false) {
+            if (attacked.isGhost == false) { //cannot attack ghost unless under certain circumstances
+                Random rand = new Random();
+                int randomDamage = rand.nextInt(3);
+                double damage = (this.strength - attacked.defense) - (0.2 * (this.luck - attacked.luck)) + randomDamage;
+                if (damage < 0) { //attacker sucks
+                    damage = 0;
+                }
+                int intDamage = (int) Math.round(damage);
+//                System.out.println(intDamage + " inflicted by " + this + " to " + attacked + ".");
+                attacked.currentHP -= intDamage;
+                if (attacked.currentHP <= 0){
+                    attacked.makeGhost();
+                }
+            } else { //attacking ghost
+                //handle spiritual items
+                //if no spiritual items, the Attack phase is skipped
+            }
+        }
+        attacked.wasAttacked = true;
     }
+
     /** Allows a character to buy an item in the store.
      * 
      * @param buy The Buyable item that the player want to purchase
      * @return true if purchase is went through
      */
     public boolean buy(Buyable buy){
+        int currentGold = this.getGold();
         // if character has the gold
-        if(getGold() >= buy.getGoldCost()) {
-            spendGold(buy.getGoldCost());
+        if(currentGold >= buy.getGoldCost()) {
+            setGold(currentGold - buy.getGoldCost());
             return true;
         }
         return false;
