@@ -107,6 +107,9 @@ public class Hero {
     public void setGold(int gold) {
         this.gold = gold;
     }
+    public void setWasAttacked(boolean attacked) {
+        this.wasAttacked = attacked;
+    }
     
     //Getter Methods
     public int getStrength(){
@@ -133,7 +136,7 @@ public class Hero {
     public int getMaxHP(){
         return maxHP;
     }
-    public int getcurrentHP() {
+    public int getCurrentHP() {
         return currentHP;
     }
     public int getMaxMP(){
@@ -145,7 +148,7 @@ public class Hero {
     public int getGold() {
         return gold;
     }
-    public boolean getWasAttacked() {
+    public boolean wasAttacked() {
         return wasAttacked;
     }
     public boolean isGhost() {
@@ -203,29 +206,29 @@ public class Hero {
     
     /** Allows a character to attack another character
      * 
-     * @param attacked The character that is getting enemy
+     * @param enemy The character that is getting attacked
      */
-    public void attackEnemy(Hero attacked) {
-        if (attacked.wasAttacked == false) {
-            if (attacked.isGhost == false) { //cannot attack ghost unless under certain circumstances
+    public void attackEnemy(Hero enemy) {
+        if (enemy.wasAttacked == false) { // **?? Can only get attacked once per turn?
+            if (enemy.isGhost == false) { //cannot attack ghost unless under certain circumstances
                 Random rand = new Random();
                 int randomDamage = rand.nextInt(3);
-                double damage = (this.strength - attacked.defense) - (0.2 * (this.luck - attacked.luck)) + randomDamage;
+                double damage = (this.strength - enemy.defense) - (0.2 * (this.luck - enemy.luck)) + randomDamage;
                 if (damage < 0) { //attacker sucks
                     damage = 0;
                 }
                 int intDamage = (int) Math.round(damage);
-//                System.out.println(intDamage + " inflicted by " + this + " to " + attacked + ".");
-                attacked.currentHP -= intDamage;
-                if (attacked.currentHP <= 0){
-                    attacked.makeGhost();
+//                System.out.println(intDamage + " inflicted by " + this + " to " + enemy + ".");
+                enemy.currentHP -= intDamage;
+                if (enemy.currentHP <= 0){
+                    enemy.makeGhost();
                 }
             } else { //attacking ghost
                 //handle spiritual items
                 //if no spiritual items, the Attack phase is skipped
             }
         }
-        attacked.wasAttacked = true;
+        enemy.wasAttacked = true;
     }
 
     /** Allows a character to buy an item in the store.
