@@ -24,6 +24,7 @@ public class HeroTest {
     }
     
     Hero hero;
+    Hero enemy;
     
     @BeforeClass
     public static void setUpClass() {
@@ -36,6 +37,7 @@ public class HeroTest {
     @Before
     public void setUp() {
         hero = new Hero();
+        enemy = new Hero();
     }
     
     @After
@@ -179,6 +181,35 @@ public class HeroTest {
         assertFalse(hero.addSpell(new Heal()));
     }
     
+    @Test
+    public void attackedHeroSuffersDamage() {
+        setUp();
+        hero.setStrength(12);
+        enemy.setStrength(12);
+        hero.setDefense(5);
+        enemy.setDefense(5);
+        hero.attackEnemy(enemy);
+        assertTrue("Attacker did not attack.", enemy.getCurrentHP() < 60);
+        //assertTrue("Attacked did not attack back.", hero.getCurrentHP() < 60);
+    }
+
+    @Test
+    public void attackedHeroDiesWhenHPIs0() {
+        setUp();
+        hero.setStrength(12);
+        enemy.setCurrentHP(1);
+        hero.attackEnemy(enemy);
+        assertTrue("Enemy did not die.", enemy.isGhost());
+    }
+    @Ignore
+    @Test
+    public void ghostsCannotBeHitWithoutSpiritualItem() {
+        setUp();
+        hero.setStrength(12);
+        enemy.makeGhost();
+        hero.attackEnemy(enemy);
+        //assert
+    }
     @Ignore
     @Test
     public void testMakeGhost() {
@@ -194,17 +225,12 @@ public class HeroTest {
     public void testCastSpell() {
         fail("CastSpell test not written yet");
     }
-    @Ignore
-    @Test
-    public void testAttackEnemy() {
-        fail("attackEnemy test not written yet");
-    }
     
     @Test
     public void testBuy() {
         assertEquals(0, hero.getGold());
         assertFalse(hero.buy(new Fireball()));
-        hero.addGold(50);
+        hero.setGold(50);
         assertTrue(hero.buy(new Fireball()));
         assertEquals(40, hero.getGold());
     }
